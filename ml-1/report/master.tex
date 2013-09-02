@@ -170,7 +170,7 @@ of your choice?} % (fold)
       Win and loss is a simple matter of checking all alignments on the board for three of the same player symbol.
       There is a draw whenever there is no winner, and no more space on the board.
       
-      Here is a sample implementation, building on the above code. (The slightly obscure \texttt{is_winning_combo} method finds its right in the next task.)
+      Here is a sample implementation, building on the above code. (The slightly obscure \texttt{is\_winning\_combo} method finds its right in the next task.)
       
       \inputminted[firstline=44,firstnumber=44,lastline=72,linenos=true]{python}{src/board.py}
     
@@ -181,24 +181,26 @@ of your choice?} % (fold)
     
       Much in the same manner as the above. I'll extract some examples.
       
-      \inputminted[firstline=74,firstnumber=74,lastline=99,linenos=true]{python}{src/board.py}
+      \inputminted[firstline=74,firstnumber=74,lastline=100,linenos=true]{python}{src/board.py}
     
     % subsection how_would_you_calculate_the_features_x_i_you_chose_for_your_representation_ (end)
     
     \subsection{How would you determine which move to play next for a given board position?} % (fold)
     \label{sub:how_would_you_determine_which_move_to_play_next_for_a_given_board_position_}
     
-      The \texttt{valid_plays} method returns a list of all valid plays.
+      The \texttt{valid\_plays} method returns a list of all valid plays.
       What we then would like is to play the move that leads to the most desirable board setup.
       
       We can devise a simple target function with fixed weights to show the gist of it.
+      
+      \inputminted[firstline=118,firstnumber=118,lastline=160,linenos=true]{python}{src/board.py}
     
     % subsection how_would_you_determine_which_move_to_play_next_for_a_given_board_position_ (end)
     
     \subsection{How would you use training examples to improve your target function?} % (fold)
     \label{sub:how_would_you_use_training_examples_to_improve_your_target_function_}
     
-      \cdots
+      
     
     % subsection how_would_you_use_training_examples_to_improve_your_target_function_ (end)
   

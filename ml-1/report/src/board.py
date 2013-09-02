@@ -84,7 +84,8 @@ class Board:
         for cells in self.alignments():
             player_cells = Board.filter_by_player(cells, player)
             empty_cells  = Board.filter_by_player(cells, None)
-            if len(player_cells) == (self._dimensions - 1) and len(empty_cells) == 1:
+            if len(player_cells) == (self._dimensions - 1) and \
+               len(empty_cells) == 1:
                 n += 1
         return n
     
