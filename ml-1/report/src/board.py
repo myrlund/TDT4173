@@ -35,11 +35,11 @@ class Board:
                     for i in range(self._dimensions)] \
                     for j in range(self._dimensions)]
     
-    def alignments(self):
-        return self.columns() + self.rows() + self.diagonals()
-    
     def rows(self):
         return [self._board[i] for i in range(self._dimensions)]
+    
+    def alignments(self):
+        return self.columns() + self.rows() + self.diagonals()
     #######
 # class Board: (cont.)
     def alignments_for_player(self, player):
@@ -142,7 +142,7 @@ def evaluate_board(board, player):
     
     w = [2.0, -2.0, 4.0, -50.0, -0.1]
     
-    # Return the $\sum_i{x_iw_i}
+    # Return the $\sum_i{x_iw_i}$
     return sum(map(lambda (x, w): x * w, zip(x, w)))
 
 def fixed_weight_play(board, player):

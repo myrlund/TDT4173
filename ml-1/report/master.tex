@@ -119,7 +119,11 @@
       \subsubsection{The candidate elimination algorithm for learning in version spaces and learning of decision trees with ID3 are two different learning methods. What can you say about the inductive bias for each of them?} % (fold)
       \label{ssub:the_candidate_elimination_algorithm}
         
+        We consider two aspects of inductive bias separately: representation bias and preference bias.
         
+        ID3 uses preference bias only, arranging decision nodes in order of projected information gain.
+        
+        Candidate elimination, conversely, utilises representation bias only, and assumes that the underlying concept is part of the hypothesis space.
         
       % subsubsection the_candidate_elimination_algorithm (end)
     
@@ -193,18 +197,148 @@ of your choice?} % (fold)
       
       We can devise a simple target function with fixed weights to show the gist of it.
       
-      \inputminted[firstline=118,firstnumber=118,lastline=160,linenos=true]{python}{src/board.py}
+      \inputminted[firstline=118,firstnumber=118,lastline=160,linenos=true,mathescape=true]{python}{src/board.py}
     
     % subsection how_would_you_determine_which_move_to_play_next_for_a_given_board_position_ (end)
     
     \subsection{How would you use training examples to improve your target function?} % (fold)
     \label{sub:how_would_you_use_training_examples_to_improve_your_target_function_}
     
+      Starting off with an initial weight vector $w$, I would through the training examples use a refining algorithm to incrementally improve the weight vector to minimize the squared error $E$:
       
+      \begin{equation}
+        E \equiv \sum_{\langle b, V_{\text{train}}(b) \in \text{training examples}}{ (V_\text{train}(b) - \hat{V}(b))^2 }
+      \end{equation}
+      
+      The weight update function itself could be as simple as that of LMS (least mean squares), performing the following update for each training example number $i$:
+      
+      \begin{equation}
+        w_i \leftarrow w_i + \eta (V_\text{train} - \hat{V}(b)) x_i
+      \end{equation}
     
     % subsection how_would_you_use_training_examples_to_improve_your_target_function_ (end)
+    
+    \subsection{What are the main differences between using this approach for tic-tac-toe game playing and using search approaches known from AI?} % (fold)
+    
+      Learning algorithms don't assume to know the value of a node up front, but rather specifies \emph{which factors are relevant} to node value.
+      Furthermore, in our case, we only descend one level and try to \emph{learn how to reason} about the node in itself.
+      
+      The strengths of the minimax and alpha-beta pruning techniques lie in their ability to search deeply, without bringing previous experience into the mix.
+    
+    % subsection  (end)
   
   % section sec2 (end)
+  
+  \section{} % (fold)
+  \label{sec3}
+  
+    \subsection{} % (fold)
+    \label{sub3_1}
+    
+      \subsubsection*{Training}
+    
+        \begin{description}
+          \item[Initial] \hfill \\
+            $G: \lbrace \langle ?, ?, ?, ?, ? \rangle \rbrace$ \\
+            $S: \lbrace \langle \emptyset, \emptyset, \emptyset, \emptyset, \emptyset \rangle \rbrace$
+          \item[Example 1] \hfill \\
+            $G: \lbrace \langle ?, ?, ?, ?, ? \rangle \rbrace$ \\
+            $S: \lbrace \langle Hair, Live, False, False, Flat \rangle \rbrace$
+          \item[Example 2] \hfill \\
+            $G: \lbrace \langle Hair, ?, ?, ?, ? \rangle, \langle ?, Live, ?, ?, ? \rangle, \langle ?, ?, False, ?, ? \rangle, \langle ?, ?, ?, False, ? \rangle, \langle ?, ?, ?, ?, Flat \rangle \rbrace$ \\
+            $S: \lbrace \langle Hair, Live, False, False, Flat \rangle \rbrace$
+          \item[Example 3] \hfill \\
+            $G: \lbrace \langle Hair, ?, ?, ?, ? \rangle, \langle ?, Live, ?, ?, ? \rangle, \langle ?, ?, False, ?, ? \rangle, \langle ?, ?, ?, False, ? \rangle \rbrace$ \\
+            $S: \lbrace \langle Hair, Live, False, False, ? \rangle \rbrace$
+        \end{description}
+      
+      \subsubsection*{Test classification}
+      
+        \begin{description}
+          \item[Example 1] \hfill \\
+            $\langle Hair, Live, False, False, None \rangle \rightarrow True$
+          \item[Example 2] \hfill \\
+            $\langle Feathers, Egg, False, True, Pointed \rangle \rightarrow \text{?}$
+          \item[Example 3] \hfill \\
+            $\langle Scales, Egg, True, False, Flat \rangle \rightarrow \text{?}$
+        \end{description}
+    
+    % subsection  (end)
+    
+    \subsection{What can the system say about the classification of the three new examples?} % (fold)
+    \label{sub:what_can_the_system_say_about_the_classification_of_the_three_new_examples}
+      
+      While the first test example falls within the general and specific classification boundaries, the two others do not.
+      Hence, we cannot say anything about their classification.
+      
+    % subsection what_can_the_system_say_about_the_classification_of_the_three_new_examples_ (end)
+    
+    \subsection{Assume that the system can ask for another training example. Which criteria should the system use to choose the training example?} % (fold)
+    
+      A training example with the $Body$ feature $Scales$ would enable us to reason about test example 3 above.
+      
+      \begin{description}
+        \item[Example 4] \hfill \\
+          $\langle Scales, Egg, True, False, Pointed \rangle \rightarrow False$
+      \end{description}
+    
+    % subsection  (end)
+    
+    \subsection{Is the CE algorithm well-suited for all machine learning problems?} % (fold)
+    \label{sub:is_the_ce_algorithm_well_suited_for_all_machine_learning_problems_}
+    
+      No.
+      
+      The CE algorithm does not handle noisy training data well -- in fact, it doesn't handle it at all.
+      One single erronous training example is all that is required to disrupt the entire classifier, no matter the size of the training set.
+    
+    % subsection is_the_ce_algorithm_well_suited_for_all_machine_learning_problems_ (end)
+  
+  % section sec3 (end)
+  
+  \section{} % (fold)
+  \label{sec4}
+  
+    \subsection{What rules would you create to gradually cover the training examples given for the Mammal domain in this way?} % (fold)
+    \label{sub:what_rules_would_you_create_to_gradually_cover_the_training_examples_given_for_the_mammal_domain_in_this_way}
+      
+      I would select the variable with the least amount of entropy, that is the variable with the least uncertainty.
+      In our training data we have three equal candidates so far in $Birth$, $EatsMeat$ and $CanFly$.
+      
+      Choosing in this way ensures a small and general decision tree, and thereby satisfies the principle of Occam's razor.
+      
+      \begin{minted}[gobble=8]{python}
+        if Birth == "Live":
+            True
+        else:
+            False
+      \end{minted}
+      
+    % subsection what_rules_would_you_create_to_gradually_cover_the_training_examples_given_for_the_mammal_domain_in_this_way (end)
+    
+    \subsection{Assume that three more training examples are added for the Mammal domain. How does this affect what rules you would pick to describe the Mammal concept?} % (fold)
+      
+      The training data is no longer consistent with the \emph{IfThen} model.
+      We will need to add some branching factors where the outcome is erronous.
+      
+      Birth is still a good starting point, but we will need to specify that pointy-teethed animals born from eggs are also mammals.
+      
+      \begin{minted}[gobble=8]{python}
+        if Birth == "Live":
+            True
+        else:
+            if Birth == "Egg" and Teeth == "Pointed":
+                True
+            else:
+                False
+      \end{minted}
+      
+      Although the tactics of \emph{IfThen} and \emph{CE} are similar in the way they work after training, they differ in how they build their classifiers:
+      CE works with general and special boundaries that are pushed towards each other, accepting examples that fall between them, while the IfThen-approach builds a decision tree considering all the training examples ``at once''.
+      
+    % subsection subsection_name (end)
+  
+  % section sec4 (end)
 
 \end{document}
 

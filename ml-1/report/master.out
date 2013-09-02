@@ -12,3 +12,12 @@
 \BOOKMARK [2][-]{subsection.2.4}{How would you calculate the features \(xi\) you chose for your representation?}{section.2}% 12
 \BOOKMARK [2][-]{subsection.2.5}{How would you determine which move to play next for a given board position?}{section.2}% 13
 \BOOKMARK [2][-]{subsection.2.6}{How would you use training examples to improve your target function?}{section.2}% 14
+\BOOKMARK [2][-]{subsection.2.7}{What are the main differences between using this approach for tic-tac-toe game playing and using search approaches known from AI?}{section.2}% 15
+\BOOKMARK [1][-]{section.3}{}{}% 16
+\BOOKMARK [2][-]{subsection.3.1}{}{section.3}% 17
+\BOOKMARK [2][-]{subsection.3.2}{What can the system say about the classification of the three new examples?}{section.3}% 18
+\BOOKMARK [2][-]{subsection.3.3}{Assume that the system can ask for another training example. Which criteria should the system use to choose the training example?}{section.3}% 19
+\BOOKMARK [2][-]{subsection.3.4}{Is the CE algorithm well-suited for all machine learning problems?}{section.3}% 20
+\BOOKMARK [1][-]{section.4}{}{}% 21
+\BOOKMARK [2][-]{subsection.4.1}{What rules would you create to gradually cover the training examples given for the Mammal domain in this way?}{section.4}% 22
+\BOOKMARK [2][-]{subsection.4.2}{Assume that three more training examples are added for the Mammal domain. How does this affect what rules you would pick to describe the Mammal concept?}{section.4}% 23
