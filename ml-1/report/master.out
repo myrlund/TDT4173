@@ -1,0 +1,14 @@
+\BOOKMARK [1][-]{section.1}{}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Give two examples of relevant machine learning problems and describe them as ``well-posed learning problems''}{section.1}% 2
+\BOOKMARK [3][-]{subsubsection.1.1.1}{Diagnosing patients}{subsection.1.1}% 3
+\BOOKMARK [3][-]{subsubsection.1.1.2}{Playing tic-tac-toe}{subsection.1.1}% 4
+\BOOKMARK [2][-]{subsection.1.2}{}{section.1}% 5
+\BOOKMARK [3][-]{subsubsection.1.2.1}{What is inductive bias? Why is it so important in machine learning?}{subsection.1.2}% 6
+\BOOKMARK [3][-]{subsubsection.1.2.2}{The candidate elimination algorithm for learning in version spaces and learning of decision trees with ID3 are two different learning methods. What can you say about the inductive bias for each of them?}{subsection.1.2}% 7
+\BOOKMARK [1][-]{section.2}{}{}% 8
+\BOOKMARK [2][-]{subsection.2.1}{What would be a good target function representation for learning to play tic-tac-toe?}{section.2}% 9
+\BOOKMARK [2][-]{subsection.2.2}{How would you represent the tic-tac-toe board in a programming language of your choice?}{section.2}% 10
+\BOOKMARK [2][-]{subsection.2.3}{How would you detect the final win, loss or draw situations?}{section.2}% 11
+\BOOKMARK [2][-]{subsection.2.4}{How would you calculate the features \(xi\) you chose for your representation?}{section.2}% 12
+\BOOKMARK [2][-]{subsection.2.5}{How would you determine which move to play next for a given board position?}{section.2}% 13
+\BOOKMARK [2][-]{subsection.2.6}{How would you use training examples to improve your target function?}{section.2}% 14

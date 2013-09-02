@@ -1,0 +1,222 @@
+\documentclass[11pt,a4paper]{article}
+
+% For å kunne skrive norske tegn.
+\usepackage[utf8]{inputenc}
+
+\usepackage{minted}
+
+% For å inkludere figurer.
+\usepackage{graphicx}
+
+% Ekstra matematikkfunksjoner.
+\usepackage{amsmath,amssymb}
+
+\usepackage[section]{placeins}
+
+\usepackage{hyperref}
+\hypersetup{%
+  colorlinks=true, % hyperlinks will be black
+  urlcolor=red,
+  linkcolor=red
+}
+
+\usepackage{fancyvrb}
+
+\newenvironment{code}
+  {
+    \VerbatimEnvironment
+    \vskip\baselineskip\hrule
+    \begin{Verbatim}[xleftmargin=7pt]%
+  }
+  {\end{Verbatim}\hrule\vskip\baselineskip}
+
+% Må inkluderes for blant annet å få tilgang til kommandoen \SI (korrekte måltall med enheter)
+\usepackage{siunitx}
+
+  % Prikk som multiplikasjonstegn (i steden for kryss).
+  \sisetup{exponent-product = \cdot}
+
+  % Pluss-minus-form på usikkerhet (i steden for parentes).
+  \sisetup{separate-uncertainty = true}
+
+% For å få tilgang til finere linjer (til bruk i tabeller og slikt).
+\usepackage{booktabs}
+
+% For justering av figurtekst og tabelltekst.
+\usepackage[font=small,labelfont=bf]{caption}
+
+% Subsections A, B,
+\renewcommand{\thesection}{\Roman{section}}
+\renewcommand{\thesubsection}{\arabic{subsection}}
+
+% Disse kommandoene kan gjøre det enklere for LaTeX å plassere figurer og tabeller der du ønsker.
+\setcounter{totalnumber}{5}
+\renewcommand{\bottomfraction}{0.95}
+\renewcommand{\floatpagefraction}{0.35}
+
+\begin{document}
+
+  % Rapportens tittel:
+  \title{Assignment 1 \\ \large{TDT4173: Machine Learning and Case-Based Reasoning}}
+  \author{Jonas Myrlund}
+
+  % Her ber vi LaTeX om å lage tittelen (til nå har vi bare sagt hva den skal inneholde):
+  \maketitle
+
+  \section{} % (fold)
+  \label{sec1}
+
+    \subsection{Give two examples of relevant machine learning problems and describe them as ``well-posed learning problems''} % (fold)
+    \label{sub11}
+    
+      A well-posed learning problem is a problem that is expressed in terms of a task $T$, a performance measure $P$, and experience $E$.
+      It is said that a program is able to learn if it improves its performance $P$ at task $T$ given experience $E$.
+      
+      \subsubsection{Diagnosing patients} % (fold)
+      \label{ssub:diagnosing_patients}
+        
+        \begin{description}
+          \item[Task] \hfill \\
+            Determining correct diagnoses for patients, given their symptoms.
+          \item[Performance measure] \hfill \\
+            Percentage of correctly diagnosed patients.
+          \item[Experience] \hfill \\
+            Patient journals, with manual correct diagnoses. Manual feedback from medical professional.
+        \end{description}
+        
+      % subsubsection diagnosing_patients (end)
+    
+      \subsubsection{Playing tic-tac-toe} % (fold)
+      \label{ssub:playing_tic_tac_toe}
+      
+        \begin{description}
+          \item[Task] \hfill \\
+            Beating opponents at tic-tac-toe.
+          \item[Performance measure] \hfill \\
+            Percentage of games won.
+          \item[Experience] \hfill \\
+            Games played against itself.
+        \end{description}
+      
+      % subsubsection playing_tic_tac_toe (end)
+    
+    % subsection sub11 (end)
+    
+    \subsection{} % (fold)
+      
+      \subsubsection{What is inductive bias? Why is it so important in machine learning?} % (fold)
+      \label{ssub:what_is_inductive_bias_why_is_it_so_important_in_machine_learning}
+        
+        Inductive bias is a learning algorithm's ability to use previous experience to solve problems it hasn't explicitly faced during training.
+        
+        In machine learning, we use training data to calibrate our algorithms to solve a \emph{general} problem.
+        Without the ability to solve previously unencountered problems, we're only solving the problem for the training data -- for which we already know the solution. That really doesn't get us anywhere interesting.
+        
+        Occam's razor is one example: choosing the simplest solution to a problem leads to better generalization, thereby introducing a form of inductive bias.
+        
+      % subsubsection what_is_inductive_bias_why_is_it_so_important_in_machine_learning (end)
+      
+      \subsubsection{The candidate elimination algorithm for learning in version spaces and learning of decision trees with ID3 are two different learning methods. What can you say about the inductive bias for each of them?} % (fold)
+      \label{ssub:the_candidate_elimination_algorithm}
+        
+        
+        
+      % subsubsection the_candidate_elimination_algorithm (end)
+    
+    % subsection  (end)
+
+  % section sec1 (end)
+  
+  \section{} % (fold)
+  \label{sec2}
+  
+    \subsection{What would be a good target function representation for learning to play tic-tac-toe?} % (fold)
+    \label{sub:what_would_be_a_good_target_function_representation_for_learning_to_play_tic_tac_toe}
+    
+      The target function $\hat{V}(b)$ being a linear combination of the board $b$'s feature vector of length $n$, we start off with defining it as:
+    
+      \begin{equation}
+        \hat{V}(b) = w_0 + \sum_{i=1}^n{w_i x_i}
+      \end{equation}
+    
+      As features, we could choose something like the following:
+    
+      \begin{description}
+        \item[$x_1$] The number of X's occurring aligned with other X's.
+        \item[$x_2$] The number of O's occurring aligned with other O's.
+        \item[$x_3$] The number of squares eligible for three X's in a row.
+        \item[$x_4$] The number of squares eligible for three O's in a row.
+      \end{description}
+    
+      The weights could be set to something seemingly reasonable to begin with, then tweaked by playing a human adversary, a random playing bot, or by letting the algorithm play against itself.
+    
+    % subsection what_would_be_a_good_target_function_representation_for_learning_to_play_tic_tac_toe_ (end)
+    
+    \subsection{How would you represent the tic-tac-toe board in a programming language
+of your choice?} % (fold)
+    \label{sub:board_representation}
+    
+      I would represent the board state as a two-dimensional array, and supply some simple helper functions to access its various traits.
+      
+      For example in Python, I would wrap the board in a class and mix in some methods for manipulating and reasoning about it -- something along these lines (quite a few methods omitted, but it expresses the general idea):
+      
+      \inputminted[lastline=42,linenos=true]{python}{src/board.py}
+    
+    % subsection how_would_you_represent_the_tic_tac_toe_board_in_a_programming_language_of_your_choice_ (end)
+    
+    \subsection{How would you detect the final win, loss or draw situations?} % (fold)
+    \label{sub:how_would_you_detect_the_final_win_loss_or_draw_situations}
+    
+      Win and loss is a simple matter of checking all alignments on the board for three of the same player symbol.
+      There is a draw whenever there is no winner, and no more space on the board.
+      
+      Here is a sample implementation, building on the above code. (The slightly obscure \texttt{is_winning_combo} method finds its right in the next task.)
+      
+      \inputminted[firstline=44,firstnumber=44,lastline=72,linenos=true]{python}{src/board.py}
+    
+    % subsection how_would_you_detect_the_final_win_loss_or_draw_situations (end)
+  
+    \subsection{How would you calculate the features ($x_i$) you chose for your representation?} % (fold)
+    \label{sub:how_would_you_calculate_the_features_x_i_you_chose_for_your_representation_}
+    
+      Much in the same manner as the above. I'll extract some examples.
+      
+      \inputminted[firstline=74,firstnumber=74,lastline=99,linenos=true]{python}{src/board.py}
+    
+    % subsection how_would_you_calculate_the_features_x_i_you_chose_for_your_representation_ (end)
+    
+    \subsection{How would you determine which move to play next for a given board position?} % (fold)
+    \label{sub:how_would_you_determine_which_move_to_play_next_for_a_given_board_position_}
+    
+      The \texttt{valid_plays} method returns a list of all valid plays.
+      What we then would like is to play the move that leads to the most desirable board setup.
+      
+      We can devise a simple target function with fixed weights to show the gist of it.
+    
+    % subsection how_would_you_determine_which_move_to_play_next_for_a_given_board_position_ (end)
+    
+    \subsection{How would you use training examples to improve your target function?} % (fold)
+    \label{sub:how_would_you_use_training_examples_to_improve_your_target_function_}
+    
+      \cdots
+    
+    % subsection how_would_you_use_training_examples_to_improve_your_target_function_ (end)
+  
+  % section sec2 (end)
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
